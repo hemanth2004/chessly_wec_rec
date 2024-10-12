@@ -1,3 +1,5 @@
+// Script that handles user interaction with the board, and saving and loading of games
+
 using UnityEngine;
 using TMPro;
 using ChessValidator;
@@ -11,13 +13,13 @@ public class Player : MonoBehaviour
     public Engine engine;
     private BoardPiece selectedPiece;    
     private Vector3 originalPosition;      
-    private bool isDragging = false; // Track whether a piece is being dragged
+    private bool _isDragging = false; // Track whether a piece is being dragged
 
     public int selectedPieceLayer = 4;
 
-    public TMP_Text historyText;
-    public TMP_Text whitePower; // lmao
-    public TMP_Text blackPower;
+    [SerializeField] private TMP_Text historyText;
+    [SerializeField] private TMP_Text whitePower; // lmao
+    [SerializeField] private TMP_Text blackPower;
     public GameObject wTM, bTM;
     public ChessTimer timer;
 
@@ -73,19 +75,19 @@ public class Player : MonoBehaviour
             {
                 selectedPiece = hit.collider.GetComponent<BoardPiece>();
                 originalPosition = selectedPiece.transform.position;
-                isDragging = true;
+                _isDragging = true;
                 engine.StartDisplayLegalMoves(selectedPiece, originalPosition);
                 selectedPiece.GetComponent<SpriteRenderer>().sortingOrder = selectedPieceLayer;
             }
         }
 
-        if (isDragging && selectedPiece != null) // During
+        if (_isDragging && selectedPiece != null) // During
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             selectedPiece.transform.position = new Vector3(mousePosition.x, mousePosition.y, originalPosition.z);
         }
 
-        if (Input.GetMouseButtonUp(0) && isDragging) // On Exit
+        if (Input.GetMouseButtonUp(0) && _isDragging) // On Exit
         {
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, 100, _boardMask);
             if(hit == false) // Outside the board
@@ -99,7 +101,7 @@ public class Player : MonoBehaviour
                 if(selectedPiece!= null)
                     engine.PieceDropped(selectedPiece, hit.collider.transform.position, originalPosition);
             }
-            isDragging = false;
+            _isDragging = false;
             selectedPiece.GetComponent<SpriteRenderer>().sortingOrder = 2;
             selectedPiece = null;
             UpdateUI();
@@ -220,7 +222,7 @@ public class Player : MonoBehaviour
         }
         endGameDropdown.value = 2;
     }
-    public void EndGame(string result)
+    public void EndGame(string result) // General End Game
     {
         timer.PauseTimer();
         gameOverWindow.SetActive(true);
@@ -235,6 +237,7 @@ public class Player : MonoBehaviour
         
     }
 
+    // Re render board upon Undo
     public void OnClickUndo()
     {
         UndoMoveArgs args = engine.main_chess.Undo();

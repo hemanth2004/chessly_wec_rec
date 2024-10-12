@@ -1,3 +1,5 @@
+// Script that handles interaction between Chess.cs validator and Player.cs's board management
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -213,11 +215,12 @@ public class Engine : MonoBehaviour
 
 
     public List<LegalMove> allLegalMoves = new List<LegalMove>();
+
     // When player lets go of a piece
     public void PieceDropped(BoardPiece piece, Vector2 position, Vector2 originalPosition)
     {
 
-        if(position == originalPosition)
+        if(position == originalPosition) // Dropped on the same square
         {
             Debug.Log("original position");
             LerpTween.MoveTo(piece.transform, ChessboardMapping.GetClosestSquarePosition(originalPosition), 0.05f);
@@ -245,7 +248,7 @@ public class Engine : MonoBehaviour
                     string castleMoveNotation = "";
 
 
-                    if (lm.notation == "O-O")
+                    if (lm.notation == "O-O") // kings side castling
                     {
                         if (piece.color == "w")
                         {
@@ -261,7 +264,7 @@ public class Engine : MonoBehaviour
                         }
                         castleMoveNotation = "O-O";
                     }
-                    else
+                    else // queens side castling
                     {
                         if (piece.color == "w")
                         {
@@ -287,10 +290,10 @@ public class Engine : MonoBehaviour
                     ClearLegalMoveIndicators();
                     break;
                 }
-                if (lm.capture)
+                if (lm.capture) // if the move also happens to be a capture
                 {
                     string capturedPos = ChessboardMapping.GetDestinationSquare(lm.notation);
-                    if(IsThisAnEnPassantSituation(capturedPos))
+                    if(IsThisAnEnPassantSituation(capturedPos)) // En passant special case
                     {
                         int rank = int.Parse("" + capturedPos[capturedPos.Length - 1]);
                         string file = capturedPos.Remove(capturedPos.Length - 1);
@@ -348,7 +351,7 @@ public class Engine : MonoBehaviour
             }
         }     
     
-        if(!isLegalPosition)
+        if(!isLegalPosition) // Invalid move case
         {
             LerpTween.MoveTo(piece.transform, originalPosition, 0.1f);
             ClearLegalMoveIndicators();

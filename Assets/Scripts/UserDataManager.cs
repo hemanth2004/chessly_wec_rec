@@ -1,3 +1,5 @@
+// Script that interacts with JS of the website to access localStorage
+
 using System;
 using System.Runtime.InteropServices;
 using UnityEngine;

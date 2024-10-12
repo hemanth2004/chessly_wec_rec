@@ -1,3 +1,5 @@
+// Script that handles timing control 
+
 using UnityEngine;
 using TMPro;
 using System;
@@ -15,7 +17,9 @@ public class ChessTimer : MonoBehaviour
     private bool isPlayerOneTurn;
     public bool timerRunning;
 
-    public Action<int> timerUpCallback;
+    // Player.cs subscribes to this event
+    public Action<int> timerUpCallback; // Callback when either of the timer ends
+    
 
     void Update()
     {
