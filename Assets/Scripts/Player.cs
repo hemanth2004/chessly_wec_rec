@@ -195,12 +195,6 @@ public class Player : MonoBehaviour
         UserDataManager.SetInt("whitePower", wPwr);
     }
 
-    private void OnApplicationQuit()
-    {
-        UserDataManager.SetFloat("blackTimer", timer.GetTime(false));
-        UserDataManager.SetFloat("whiteTimer", timer.GetTime(true));
-    }
-
     public void TimerUp(int lostPlayer)
     {
         if (lostPlayer == 1)
@@ -235,8 +229,6 @@ public class Player : MonoBehaviour
         UserDataManager.SetString("fen", "");
         UserDataManager.SetInt("blackPower", 0);
         UserDataManager.SetInt("whitePower", 0);
-        UserDataManager.SetFloat("blackTimer", timer.GetTime(false));
-        UserDataManager.SetFloat("whiteTimer", timer.GetTime(true));
         if (CheckBox != null)
             Destroy(CheckBox.gameObject);
         CheckBox = null;
@@ -292,8 +284,8 @@ public class Player : MonoBehaviour
 
     public void NewGame(string mode)
     {
-        UserDataManager.SetFloat("whiteTimer", 0f);
-        UserDataManager.SetFloat("blackTimer", 0f);
+        UserDataManager.SetFloat("whiteTimer", 0);
+        UserDataManager.SetFloat("blackTimer", 0);
         StartCoroutine(engine.ClearBoardPieces());
         engine.StartGame();
         timer.SetTime(mode);

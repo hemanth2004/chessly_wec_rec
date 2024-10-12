@@ -110,5 +110,9 @@ public class ChessTimer : MonoBehaviour
         int minutes = Mathf.FloorToInt(time / 60);
         int seconds = Mathf.FloorToInt(time % 60);
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        if (isPlayerOneTurn)
+            UserDataManager.SetFloat("whiteTimer", playerOneTime);
+        else
+            UserDataManager.SetFloat("blackTimer", playerTwoTime);
     }
 }
