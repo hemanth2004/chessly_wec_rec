@@ -25,10 +25,11 @@ b. Click Edit > Clear All PlayerPrefs
 6. When you are runnning the build locally, make sure that all compressions are disabled in Player Settings and in Build Settings. This is because to decompmress your game is a task for the server thats serving the website. And unless you have added that functionality to your server, don't compress your build. If you do want to test compression/build for production with compression, make sure to do it on sites like itch.io which support it.
 7. Make sure to also select the PWA template. This brings ServiceWorker.js and manifest.webmanifest files to your build that defines its PWA behaviour.
 
-## build & test walkthrough
+## build, demo and core code walkthrough video
 
-https://github.com/user-attachments/assets/07296a11-f59f-4d5c-82f9-7bab313d5edf
+https://drive.google.com/file/d/1MwlN2XdAWpmQCB7I1LDLl-duTw0p4y7w/view?usp=sharing
 
+(couldn't upload directly cuz the video is greater than 100MB)
 
 # credits and references
 1. [Board Piece Sprites](https://opengameart.org/content/chess-pieces-and-board-squares)
