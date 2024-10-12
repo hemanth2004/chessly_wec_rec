@@ -2,6 +2,10 @@
 A two-player, offline, chess site that's also a PWA.
 Made for the NITK Web Enthusiast's Club GDG SIG
 
+## deployed builds
+1. [itch.io](https://hmnt.itch.io/chessly-wecrec?secret=s42JYkGE6cjiB61UFEaHnRXILg)
+2. [github pages (Recommended)](https://hemanth2004.github.io/chessly-buildtest/)  
+
 ## how to test in-editor
 1. Download and install the Unity game engine (make sure that the version is greater than 2022.3.5f1 as only then the PWA template will be supported).
 2. Make sure you have the WebGL build functionality for the unity version you are using.
@@ -19,8 +23,13 @@ b. Click Edit > Clear All PlayerPrefs
 4. Once its done, start a local http server to run the build. The build folder will contain an index.html file once the build process is over.
 5. Alternatively, you can upload this folder to hosting sites like github pages or even itch.io.
 6. When you are runnning the build locally, make sure that all compressions are disabled in Player Settings and in Build Settings. This is because to decompmress your game is a task for the server thats serving the website. And unless you have added that functionality to your server, don't compress your build. If you do want to test compression/build for production with compression, make sure to do it on sites like itch.io which support it.
-7. Make sure to also select the PWA template. This brings ServiceWorker.js and anifest.webmanifest files to your build that defines its PWA behaviour.
+7. Make sure to also select the PWA template. This brings ServiceWorker.js and manifest.webmanifest files to your build that defines its PWA behaviour.
+
+## build & test walkthrough
+
+https://github.com/user-attachments/assets/07296a11-f59f-4d5c-82f9-7bab313d5edf
+
 
 # credits and references
-1. [Board Pieces](https://opengameart.org/content/chess-pieces-and-board-squares)
+1. [Board Piece Sprites](https://opengameart.org/content/chess-pieces-and-board-squares)
 2. [Chess.js port to C#](https://github.com/dayjur/Chess.cs)
